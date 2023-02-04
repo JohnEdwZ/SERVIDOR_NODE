@@ -1,0 +1,14 @@
+{
+  "name": "servidor-en-node",
+  "version": "1.0.0",
+  "description": "servidor hecho con node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "johnEd",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
