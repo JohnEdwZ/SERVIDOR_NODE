@@ -1,7 +1,9 @@
 const express = require("express");
 const multer = require("multer");
+const sharp = require("sharp")
+const fs = require("fs")
 
-const upload = multer({dest: 'uploads/'})
+const upload = multer({storage: multer.memoryStorage()})
 const app = express();
 
 app.use(express.json())
@@ -10,15 +12,22 @@ app.get('/', function(req, res){
     res.send('Hola Mundo')
 })
 
-app.post('/imagen', upload.single('imagen'), function(req, res){
+app.post('/imagen', upload.single('imagen'), async function(req, res){
 
     const body = req.body
     const imagen = req.file
-    
 
-    console.log(imagen)
+    const processedImage = sharp(imagen.buffer)
+    const resizedImage = processedImage.resize(50, 100, {
+        fit: "contain", 
+        background: "#FFF"
+    })
+    const resizedImageBuffer = await  resizedImage.toBuffer()    
 
-    res.send("Hola mundo POST")
+    fs.writeFileSync("uploads/cocina.png", resizedImageBuffer)
+    console.log(resizedImageBuffer)
+
+    res.send({resizedImage: resizedImageBuffer})
 })
 
 app.listen(4000)
