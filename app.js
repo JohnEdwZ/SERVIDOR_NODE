@@ -30,4 +30,8 @@ app.post('/imagen', upload.single('imagen'), async function(req, res){
     res.send({resizedImage: resizedImageBuffer})
 })
 
-app.listen(4000)
+const PORT = Process.env.PORT || undefined || 3000 
+console.log({PORT})
+app.listen(PORT, function() {
+    console.log("servidor conectado al puerto ",PORT)
+})
