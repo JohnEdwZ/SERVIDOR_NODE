@@ -9,3 +9,5 @@
 - /node_modules
 
 > librerias internas: fs
+
+> para redimensionar imagenes
